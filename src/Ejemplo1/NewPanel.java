@@ -19,10 +19,13 @@ import javax.swing.Timer;
 public class NewPanel extends JPanel implements ActionListener{
     
     private Timer timer;
+    private int x;
 
     public NewPanel() {
         this.timer = new Timer(25,this);
         this.timer.start();
+        this.x=50;
+        
     }
     
     
@@ -48,39 +51,17 @@ public class NewPanel extends JPanel implements ActionListener{
 //        g.drawOval(87, 125, 25, 25);
         
         g.setColor(Color.red);
-        g.fillOval(350, 275, 50, 50);
-        g.fillOval(450, 275, 50, 50);
+        g.fillOval(x, 275, 50, 50);
+        g.fillOval(x+100, 275, 50, 50);
         g.setColor(Color.BLUE);
-        g.fillRect(325, 225, 200, 50);
-        int[] x = {350,400,450,500};
+        g.fillRect(x-25, 225, 200, 50);
+        int[] x = {this.x,this.x+50,this.x+100,this.x+150};
         int[] y = {225,175,175,225};
         g.fillPolygon(x, y, 4);
         g.setColor(Color.WHITE);
-        g.drawRect(325, 175, 200, 150);
+        g.drawRect(this.x-25, 175, 200, 150);
         
-        
-        g.setColor(Color.red);
-        g.fillOval(400, 275, 50, 50);
-        g.fillOval(500, 275, 50, 50);
-        g.setColor(Color.BLUE);
-        g.fillRect(375, 225, 200, 50);
-        int[] x1 = {400,450,500,550};
-        int[] y1 = {225,175,175,225};
-        g.fillPolygon(x1, y1, 4);
-        g.setColor(Color.WHITE);
-        g.drawRect(375, 175, 200, 150);
-        
-        
-        g.setColor(Color.red);
-        g.fillOval(550, 275, 50, 50);
-        g.fillOval(650, 275, 50, 50);
-        g.setColor(Color.BLUE);
-        g.fillRect(525, 225, 200, 50);
-        int[] x2 = {550,600,650,700};
-        int[] y2 = {225,175,175,225};
-        g.fillPolygon(x2, y2, 4);
-        g.setColor(Color.WHITE);
-        g.drawRect(525, 175, 200, 150);
+       
         System.out.println("Clik !!!");
        
             
@@ -88,6 +69,8 @@ public class NewPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+      
        repaint();
+       x=x+1;
     }
 }

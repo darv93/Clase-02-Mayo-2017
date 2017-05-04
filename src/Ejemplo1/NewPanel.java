@@ -28,13 +28,18 @@ public class NewPanel extends JPanel implements ActionListener,MouseListener {
     
     private Timer timer;
     private int x;
+    private int x1;
     private int y;
+    private int secuencia;
 
     public NewPanel() {
         this.addMouseListener(this);
         this.timer = new Timer(25,this);
         this.timer.start();
         this.x=0;
+        this.x1=0;
+        this.y=0;
+        this.secuencia = 0;
         
         
     }
@@ -44,7 +49,10 @@ public class NewPanel extends JPanel implements ActionListener,MouseListener {
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Image fondo = loadImage("fondo.png");
+        Image gato = loadImage("cats.gif");
          g.drawImage(fondo, 0, 0, 800, 400, this);
+         
+         g.drawImage(gato, x1+300, 200, x1+300+132,200+80,this.secuencia*132,0,(this.secuencia*132)+132,80,null);
 //        g.drawLine(0, 0, 50, 50);
 //        g.drawString("Banner", 0, 40);
         g.setColor(Color.red);
@@ -96,7 +104,7 @@ public class NewPanel extends JPanel implements ActionListener,MouseListener {
         Rectangle obstaculo1 = new Rectangle(500, 175, 20, 150);
         Rectangle obstaculo2 = new Rectangle(25, y+75, 25, 50);
         
-        if(carro.intersects(obstaculo1)||carro.intersects(obstaculo2)){
+        if(carro.intersects(obstaculo1)/*||carro.intersects(obstaculo2)*/){
             System.out.println("Colisión!!!");
             this.timer.stop();
         }
@@ -107,7 +115,14 @@ public class NewPanel extends JPanel implements ActionListener,MouseListener {
        this.CheckColission();
        repaint();
        x=x+3;
+       x1=x1+5;
        y=y+5;
+       if(this.secuencia==5){
+           this.secuencia=0;
+       }else{
+           this.secuencia++;
+       }
+       
     }
 
     @Override

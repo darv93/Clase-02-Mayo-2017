@@ -6,12 +6,15 @@
 package Ejemplo1;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.logging.Level;
@@ -32,7 +35,15 @@ public class NewPanel extends JPanel implements ActionListener,MouseListener {
     private int y;
     private int secuencia;
 
+    
     public NewPanel() {
+        
+        this.addKeyListener(new TAdapter());
+        setFocusable(true);    
+        
+        //setBackground(Color.WHITE);
+        //setPreferredSize(new Dimension(null));
+        
         this.addMouseListener(this);
         this.timer = new Timer(25,this);
         this.timer.start();
@@ -122,8 +133,37 @@ public class NewPanel extends JPanel implements ActionListener,MouseListener {
        }else{
            this.secuencia++;
        }
-       
     }
+       
+       private class TAdapter extends KeyAdapter{
+           @Override
+           public void keyReleased(KeyEvent e){
+               System.out.println("Solte la tecla");
+           }
+           
+           @Override
+           public void keyPressed(KeyEvent e){
+               int key = e.getKeyCode();
+               if (key == KeyEvent.VK_RIGHT){
+                   System.out.println("presionaste la teclas derecha");
+                   x=x+5;
+               }
+            if (key == KeyEvent.VK_LEFT){
+                   System.out.println("presionaste la teclas izquierda");
+                   x=x-5;
+               }
+            if (key == KeyEvent.VK_UP){
+                   System.out.println("presionaste la teclas arriba");
+                   y=-5;
+               }
+            if (key == KeyEvent.VK_DOWN){
+                   System.out.println("presionaste la teclas abajo");
+                   y=5;
+               }
+           }
+           
+       }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
